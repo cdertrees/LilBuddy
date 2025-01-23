@@ -20,6 +20,7 @@ public class Filecontroller : MonoBehaviour
     //5 1dpos1
     //6 1dpos2
     //7 1dpos3
+    //8 1dpos4
     [Header("File Positions")]
     public List<GameObject> positions;
     [Header("Folders")]
@@ -35,7 +36,7 @@ public class Filecontroller : MonoBehaviour
             case 1:
                 foreach (GameObject go in folders)
                 {
-                    if (folders.IndexOf(go) < 4)
+                    if (folders.IndexOf(go) < 2)
                     {
                         go.SetActive(true);
                     }
@@ -53,7 +54,7 @@ public class Filecontroller : MonoBehaviour
                     case 1:
                         foreach (GameObject go in folders)
                         {
-                            if (folders.IndexOf(go) < 6 && folders.IndexOf(go) > 3)
+                            if (folders.IndexOf(go) < 6 && folders.IndexOf(go) > 2)
                             {
                                 go.SetActive(true);
                             }
@@ -99,6 +100,10 @@ public class Filecontroller : MonoBehaviour
                             else
                             {
                                 cf.SetActive(false);
+                                foreach (GameObject go in folders)
+                                {
+                                    go.SetActive(false);
+                                }
                             }
                         }
                         break;
@@ -120,6 +125,10 @@ public class Filecontroller : MonoBehaviour
                             else
                             {
                                 cf.SetActive(false);
+                                foreach (GameObject go in folders)
+                                {
+                                    go.SetActive(false);
+                                }
                             }
                         }
                         break;
@@ -137,6 +146,23 @@ public class Filecontroller : MonoBehaviour
                         foreach (GameObject cf in contentFiles)
                         {
                             if (contentFiles.IndexOf(cf) < 6 && contentFiles.IndexOf(cf) > 9)
+                            {
+                                cf.SetActive(true);
+                            }
+                            else
+                            {
+                                cf.SetActive(false);
+                                foreach (GameObject go in folders)
+                                {
+                                    go.SetActive(false);
+                                }
+                            }
+                        }
+                        break;
+                    case 8:
+                        foreach (GameObject cf in contentFiles)
+                        {
+                            if (contentFiles.IndexOf(cf) < 8 && contentFiles.IndexOf(cf) > 11)
                             {
                                 cf.SetActive(true);
                             }
