@@ -36,7 +36,7 @@ public class Filecontroller : MonoBehaviour
             case 1:
                 foreach (GameObject go in folders)
                 {
-                    if (folders.IndexOf(go) < 2)
+                    if (folders.IndexOf(go) < 4)
                     {
                         go.SetActive(true);
                     }
@@ -54,7 +54,7 @@ public class Filecontroller : MonoBehaviour
                     case 1:
                         foreach (GameObject go in folders)
                         {
-                            if (folders.IndexOf(go) < 6 && folders.IndexOf(go) > 2)
+                            if (folders.IndexOf(go) < 6 && folders.IndexOf(go) > 3)
                             {
                                 go.SetActive(true);
                             }
@@ -80,7 +80,7 @@ public class Filecontroller : MonoBehaviour
                     case 3:
                         foreach (GameObject go in folders)
                         {
-                            if (folders.IndexOf(go) < 8 && folders.IndexOf(go) > 6)
+                            if (folders.IndexOf(go) < 9 && folders.IndexOf(go) > 6)
                             {
                                 go.SetActive(true);
                             }
