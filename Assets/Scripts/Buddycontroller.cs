@@ -11,17 +11,20 @@ public class Buddycontroller : MonoBehaviour
     [Header("Components")]
     public Animator anim;
     public SpriteRenderer cover;
+    public CircleCollider2D collider;
     [Header("Gameobjects")] 
     public GameObject hpivot;
     public GameObject hand1;
     public GameObject hand2;
-    public GameObject filesystem;
+    public Filecontroller filesystem;
     [Header("Bools")]
     public bool up;
     public bool down;
     public bool left;
     public bool right;
     public bool step = true;
+    public bool inside = false;
+    public bool insideobject = false;
     [Header("Floats")]
     public float raycastdistance;
     [Header("Ints")]
@@ -55,6 +58,7 @@ public class Buddycontroller : MonoBehaviour
             cover.enabled = false;
         }
         #endregion
+        
         #region keysup
         if (Input.GetKeyUp(KeyCode.W))
         {
@@ -76,6 +80,40 @@ public class Buddycontroller : MonoBehaviour
             right = false;
             anim.SetBool("Walking", false);
         }
+        #endregion
+        
+        #region go inside windows
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (inside && step && !insideobject)
+            {
+                inside = false;
+                step = false;
+                StartCoroutine(cd());
+                collider.isTrigger = false;
+            }
+            if (!inside && step)
+            {
+                inside = true;
+                step = false;
+                StartCoroutine(cd());
+                collider.isTrigger = true;
+            }
+            
+        }
+        #endregion
+        #region folder navigation
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (inside && step && insideobject)
+            {
+                step = false;
+                StartCoroutine(cd());
+                filesystem.navigate(folder);
+            }
+        }
+
         #endregion
     }
 
@@ -127,54 +165,77 @@ public class Buddycontroller : MonoBehaviour
 
         #region hands
         LayerMask mask = LayerMask.GetMask("window");
-        
-        RaycastHit2D uhit = Physics2D.Raycast(transform.position, Vector2.up,raycastdistance, mask);
-        if (uhit)
+
+        if (!inside)
         {
-            UnityEngine.Debug.Log("uphit");
-            hpivot.transform.rotation = Quaternion.Euler(0,0,270);
-            anim.SetBool("Pushing", true);
-            hand1.SetActive(true);
-            hand2.SetActive(true);
+            RaycastHit2D uhit = Physics2D.Raycast(transform.position, Vector2.up, raycastdistance, mask);
+            if (uhit)
+            {
+                hpivot.transform.rotation = Quaternion.Euler(0, 0, 270);
+                anim.SetBool("Pushing", true);
+                hand1.SetActive(true);
+                hand2.SetActive(true);
+            }
+
+            RaycastHit2D dhit = Physics2D.Raycast(transform.position, Vector2.down, raycastdistance, mask);
+            if (dhit)
+            {
+                hpivot.transform.rotation = Quaternion.Euler(0, 0, 90);
+                anim.SetBool("Pushing", true);
+                hand1.SetActive(true);
+                hand2.SetActive(true);
+            }
+
+            RaycastHit2D lhit = Physics2D.Raycast(transform.position, Vector2.left, raycastdistance, mask);
+            if (lhit)
+            {
+                hpivot.transform.rotation = Quaternion.Euler(0, 0, 0);
+                anim.SetBool("Pushing", true);
+                hand1.SetActive(true);
+                hand2.SetActive(true);
+            }
+
+            RaycastHit2D rhit = Physics2D.Raycast(transform.position, Vector2.right, raycastdistance, mask);
+            if (rhit)
+            {
+                hpivot.transform.rotation = Quaternion.Euler(0, 0, 180);
+                anim.SetBool("Pushing", true);
+                hand1.SetActive(true);
+                hand2.SetActive(true);
+            }
+
+            RaycastHit2D ahit1 = Physics2D.Raycast(transform.position, Vector2.down, raycastdistance, mask);
+            RaycastHit2D ahit2 = Physics2D.Raycast(transform.position, Vector2.up, raycastdistance, mask);
+            RaycastHit2D ahit3 = Physics2D.Raycast(transform.position, Vector2.left, raycastdistance, mask);
+            RaycastHit2D ahit4 = Physics2D.Raycast(transform.position, Vector2.right, raycastdistance, mask);
+            if (!ahit1 && !ahit2 && !ahit3 && !ahit4)
+            {
+                anim.SetBool("Pushing", false);
+                hand1.SetActive(false);
+                hand2.SetActive(false);
+            }
         }
-        RaycastHit2D dhit = Physics2D.Raycast(transform.position, Vector2.down,raycastdistance, mask);
-        if (dhit)
-        {
-            UnityEngine.Debug.Log("downhit");
-            hpivot.transform.rotation = Quaternion.Euler(0,0,90);
-            anim.SetBool("Pushing", true);
-            hand1.SetActive(true);
-            hand2.SetActive(true);
-        }
-        RaycastHit2D lhit = Physics2D.Raycast(transform.position, Vector2.left,raycastdistance, mask);
-        if (lhit)
-        {
-            UnityEngine.Debug.Log("lefthit");
-            hpivot.transform.rotation = Quaternion.Euler(0,0,0);
-            anim.SetBool("Pushing", true);
-            hand1.SetActive(true);
-            hand2.SetActive(true);
-        }
-        RaycastHit2D rhit = Physics2D.Raycast(transform.position, Vector2.right,raycastdistance, mask);
-        if (rhit)
-        {
-            UnityEngine.Debug.Log("righthit");
-            hpivot.transform.rotation = Quaternion.Euler(0,0,180);
-            anim.SetBool("Pushing", true);
-            hand1.SetActive(true);
-            hand2.SetActive(true);
-        }
-        
-        RaycastHit2D ahit1 = Physics2D.Raycast(transform.position, Vector2.down,raycastdistance, mask);
-        RaycastHit2D ahit2 = Physics2D.Raycast(transform.position, Vector2.up,raycastdistance, mask);
-        RaycastHit2D ahit3 = Physics2D.Raycast(transform.position, Vector2.left,raycastdistance, mask);
-        RaycastHit2D ahit4 = Physics2D.Raycast(transform.position, Vector2.right,raycastdistance, mask);
-        if (!ahit1&&!ahit2&&!ahit3&&!ahit4)
+
+        #region detect inside
+        if (inside)
         {
             anim.SetBool("Pushing", false);
             hand1.SetActive(false);
             hand2.SetActive(false);
+            RaycastHit2D ahit1 = Physics2D.Raycast(transform.position, Vector2.down, raycastdistance, mask);
+            RaycastHit2D ahit2 = Physics2D.Raycast(transform.position, Vector2.up, raycastdistance, mask);
+            RaycastHit2D ahit3 = Physics2D.Raycast(transform.position, Vector2.left, raycastdistance, mask);
+            RaycastHit2D ahit4 = Physics2D.Raycast(transform.position, Vector2.right, raycastdistance, mask);
+            if (!ahit1 && !ahit2 && !ahit3 && !ahit4)
+            {
+                insideobject = false;
+            }
+            else
+            {
+                insideobject = true;
+            }
         }
+        #endregion
         #endregion
     }
     public IEnumerator cd()

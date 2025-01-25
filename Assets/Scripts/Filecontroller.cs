@@ -178,4 +178,46 @@ public class Filecontroller : MonoBehaviour
             #endregion
         }
     }
+
+    public void navigate(int f)
+    {
+        switch (f)
+        {
+            case 1:
+                Depth = 2;
+                localroot = 1;
+                break;
+            case 2:
+                Depth = 2;
+                localroot = 2;
+                break;
+            case 3:
+                Depth = 2;
+                localroot = 3;
+                break;
+            case 4:
+                Depth = 2;
+                localroot = 4;
+                break;
+            case 5:
+                Depth = 3;
+                localroot = 5;
+                break;
+            case 6:
+                Depth = 3;
+                localroot = 6;
+                break;
+            case 7:
+                Depth = 3;
+                localroot = 7;
+                break;
+            case 8:
+                Depth = 3;
+                localroot = 8;
+                break;
+            case 9:
+                Debug.Log("9");
+                break;
+        }
+    }
 }
