@@ -15,17 +15,13 @@ public class Buddycontroller : MonoBehaviour
     public GameObject hpivot;
     public GameObject hand1;
     public GameObject hand2;
-    public GameObject filesystem;
     [Header("Bools")]
     public bool up;
     public bool down;
     public bool left;
     public bool right;
     public bool step = true;
-    [Header("Floats")]
-    public float raycastdistance;
-    [Header("Ints")]
-    public int folder;
+    [Header("Floats")] public float raycastdistance;
     #endregion
     void Update()
     {
@@ -181,11 +177,5 @@ public class Buddycontroller : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         step = true;
-    }
-
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        string fd = other.gameObject.name;
-        folder = int.Parse(fd);
     }
 }
