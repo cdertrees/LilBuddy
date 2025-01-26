@@ -17,6 +17,7 @@ public class Buddycontroller : MonoBehaviour
     public GameObject hand1;
     public GameObject hand2;
     public Filecontroller filesystem;
+    public contentserver closest;
     [Header("Bools")]
     public bool up;
     public bool down;
@@ -27,8 +28,11 @@ public class Buddycontroller : MonoBehaviour
     public bool insideobject = false;
     [Header("Floats")]
     public float raycastdistance;
+    public float bestN = 999;
     [Header("Ints")]
     public int folder;
+    [Header("Lists")]
+    public List<contentserver> icons;
     #endregion
     void Update()
     {
@@ -82,9 +86,10 @@ public class Buddycontroller : MonoBehaviour
         }
         #endregion
         
-        #region go inside windows
         if (Input.GetKeyDown(KeyCode.E))
         {
+            /*
+            #region go inside windows
             if (inside && step && !insideobject)
             {
                 inside = false;
@@ -99,22 +104,41 @@ public class Buddycontroller : MonoBehaviour
                 StartCoroutine(cd());
                 collider.isTrigger = true;
             }
-            
-        }
-        #endregion
-        #region folder navigation
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
+            #endregion
+            #region folder navigation
             if (inside && step && insideobject)
             {
                 step = false;
                 StartCoroutine(cd());
                 filesystem.navigate(folder);
             }
+            #endregion
+            */
+            if (step)
+            {
+                step = false;
+                StartCoroutine(cd());
+                foreach (contentserver t in icons)
+                {
+                    if (transform.position.y >= t.transform.position.y+7 || transform.position.y <= t.transform.position.y-7) continue;
+                    Debug.Log("pass1");
+                    if (t.transform.position.x < transform.position.x) continue;
+                    Debug.Log("pass2");
+                    Vector3 offset = t.transform.position - transform.position;
+                    if(Mathf.Abs(offset.x) < Mathf.Abs(offset.y)) continue;
+                    Debug.Log("pass3");
+                    float dist = Vector3.Distance(transform.position, t.transform.position);
+                    if (dist > 1) continue;
+                    Debug.Log("pass4");
+                    if (dist < bestN)
+                    {
+                        bestN = dist;
+                        closest = t;
+                    }
+                }
+                closest.openWindow();
+            }
         }
-
-        #endregion
     }
 
     public void FixedUpdate()

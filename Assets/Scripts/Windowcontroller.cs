@@ -43,4 +43,9 @@ public class Windowcontroller : MonoBehaviour
             }
         }
     }
+
+    public void closeWindow()
+    {
+        this.gameObject.SetActive(false);
+    }
 }
