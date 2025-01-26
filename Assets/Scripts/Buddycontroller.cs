@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -16,6 +17,7 @@ public class Buddycontroller : MonoBehaviour
     public GameObject hpivot;
     public GameObject hand1;
     public GameObject hand2;
+    public Windowcontroller currentwindow;
     public Filecontroller filesystem;
     public contentserver closest;
     [Header("Bools")]
@@ -26,9 +28,12 @@ public class Buddycontroller : MonoBehaviour
     public bool step = true;
     public bool inside = false;
     public bool insideobject = false;
+    public bool firstpress;
     [Header("Floats")]
     public float raycastdistance;
     public float bestN = 999;
+    public float delay;
+    public float timesincepress;
     [Header("Ints")]
     public int folder;
     [Header("Lists")]
@@ -85,11 +90,60 @@ public class Buddycontroller : MonoBehaviour
             anim.SetBool("Walking", false);
         }
         #endregion
-        
+
         if (Input.GetKeyDown(KeyCode.E))
         {
-            /*
+
+            if (firstpress)
+            {
+                bool isDoublePress = Time.time - timesincepress <= delay;
+                if (isDoublePress)
+                {
+
+                    #region servecontent
+                    if (step)
+                    {
+                        step = false;
+                        StartCoroutine(cd());
+                        foreach (contentserver t in icons)
+                        {
+
+                            float dist = Vector3.Distance(transform.position, t.transform.position);
+                            if (dist > 1) continue;
+                            if (dist < bestN)
+                            {
+                                bestN = dist;
+                                closest = t;
+                            }
+                        }
+                        closest.openWindow();
+                    }
+                    #endregion
+                    #region folder navigation
+
+                    if (inside && step && insideobject)
+                    {
+                        step = false;
+                        StartCoroutine(cd());
+                        filesystem.navigate(folder);
+                    }
+
+                    #endregion
+                    firstpress = false;
+                }
+            }
+            else
+            {
+                firstpress = true;
+            }
+
+            timesincepress = Time.time;
+        }
+
+        if (firstpress && Time.time - timesincepress > delay)
+        {
             #region go inside windows
+
             if (inside && step && !insideobject)
             {
                 inside = false;
@@ -97,6 +151,7 @@ public class Buddycontroller : MonoBehaviour
                 StartCoroutine(cd());
                 collider.isTrigger = false;
             }
+
             if (!inside && step)
             {
                 inside = true;
@@ -104,40 +159,10 @@ public class Buddycontroller : MonoBehaviour
                 StartCoroutine(cd());
                 collider.isTrigger = true;
             }
+
             #endregion
-            #region folder navigation
-            if (inside && step && insideobject)
-            {
-                step = false;
-                StartCoroutine(cd());
-                filesystem.navigate(folder);
-            }
-            #endregion
-            */
-            if (step)
-            {
-                step = false;
-                StartCoroutine(cd());
-                foreach (contentserver t in icons)
-                {
-                    if (transform.position.y >= t.transform.position.y+7 || transform.position.y <= t.transform.position.y-7) continue;
-                    Debug.Log("pass1");
-                    if (t.transform.position.x < transform.position.x) continue;
-                    Debug.Log("pass2");
-                    Vector3 offset = t.transform.position - transform.position;
-                    if(Mathf.Abs(offset.x) < Mathf.Abs(offset.y)) continue;
-                    Debug.Log("pass3");
-                    float dist = Vector3.Distance(transform.position, t.transform.position);
-                    if (dist > 1) continue;
-                    Debug.Log("pass4");
-                    if (dist < bestN)
-                    {
-                        bestN = dist;
-                        closest = t;
-                    }
-                }
-                closest.openWindow();
-            }
+
+            firstpress = false;
         }
     }
 
@@ -272,5 +297,7 @@ public class Buddycontroller : MonoBehaviour
     {
         string fd = other.gameObject.name;
         folder = int.Parse(fd);
+        if (other.gameObject.GetComponent<Windowcontroller>()!=null)
+        currentwindow = other.gameObject.GetComponent<Windowcontroller>();
     }
 }
