@@ -107,14 +107,10 @@ public class Buddycontroller : MonoBehaviour
                         StartCoroutine(cd());
                         foreach (contentserver t in icons)
                         {
-
                             float dist = Vector3.Distance(transform.position, t.transform.position);
-                            if (dist > 1) continue;
-                            if (dist < bestN)
-                            {
-                                bestN = dist;
-                                closest = t;
-                            }
+                            Debug.Log(dist);
+                            if (dist >= 0.7f) continue;
+                            closest = t;
                         }
                         closest.openWindow();
                     }
@@ -161,7 +157,19 @@ public class Buddycontroller : MonoBehaviour
             }
 
             #endregion
-
+            
+            if (inside && step && insideobject)
+            {
+                step = false;
+                StartCoroutine(cd());
+                float dist = Vector3.Distance(transform.position, currentwindow.closebutton.transform.position);
+                Debug.Log(dist);
+                if (dist <= 0.7f)
+                {
+                    currentwindow.close();
+                }
+            }
+            
             firstpress = false;
         }
     }
@@ -297,7 +305,9 @@ public class Buddycontroller : MonoBehaviour
     {
         string fd = other.gameObject.name;
         folder = int.Parse(fd);
-        if (other.gameObject.GetComponent<Windowcontroller>()!=null)
-        currentwindow = other.gameObject.GetComponent<Windowcontroller>();
+        if (other.gameObject.GetComponentInParent<Windowcontroller>() != null)
+        {
+            currentwindow = other.gameObject.GetComponentInParent<Windowcontroller>();
+        }
     }
 }

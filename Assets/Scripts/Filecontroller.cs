@@ -28,7 +28,13 @@ public class Filecontroller : MonoBehaviour
     [Header("Content Files")]
     public List<GameObject> contentFiles;
     #endregion
-    public void Update()
+
+    public void Start()
+    {
+        change();
+    }
+
+    public void change()
     {
         switch (Depth)
         {
@@ -219,5 +225,6 @@ public class Filecontroller : MonoBehaviour
                 Debug.Log("9");
                 break;
         }
+        change();
     }
 }

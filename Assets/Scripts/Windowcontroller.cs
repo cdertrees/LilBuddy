@@ -7,6 +7,7 @@ public class Windowcontroller : MonoBehaviour
 {
     public Animator anim;
     public Buddycontroller buddy;
+    public GameObject closebutton;
 
     public void Awake()
     {
@@ -30,6 +31,7 @@ public class Windowcontroller : MonoBehaviour
             if (collision.gameObject.layer == 3)
             {
                 anim.SetBool("bigger", true);
+                buddy.currentwindow = this;
             }
         }
     }
@@ -44,8 +46,14 @@ public class Windowcontroller : MonoBehaviour
         }
     }
 
+    public void close()
+    {
+        anim.SetBool("close", true);
+    }
     public void closeWindow()
     {
         this.gameObject.SetActive(false);
+        anim.SetBool("bigger", false);
+        anim.SetBool("close", false);
     }
 }
