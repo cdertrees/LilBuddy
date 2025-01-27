@@ -14,6 +14,7 @@ public class Buddycontroller : MonoBehaviour
     public GameObject hpivot;
     public GameObject hand1;
     public GameObject hand2;
+    public GameObject carry;
     public Windowcontroller currentwindow;
     public Filecontroller filesystem;
     public contentserver closest;
@@ -35,6 +36,8 @@ public class Buddycontroller : MonoBehaviour
     public int folder;
     [Header("Lists")]
     public List<contentserver> icons;
+    [Header("Strings")]
+    public string heldstring;
     #endregion
     void Update()
     {
