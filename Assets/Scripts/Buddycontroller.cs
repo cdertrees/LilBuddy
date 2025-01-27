@@ -161,13 +161,25 @@ public class Buddycontroller : MonoBehaviour
             #region close window
             if (inside && step && insideobject)
             {
-                step = false;
-                StartCoroutine(cd());
                 float dist = Vector3.Distance(transform.position, currentwindow.closebutton.transform.position);
-                Debug.Log(dist);
                 if (dist <= 0.7f)
                 {
                     currentwindow.close();
+                    step = false;
+                    StartCoroutine(cd());
+                }
+            }
+            #endregion
+            #region riptext
+            if (inside && step && insideobject)
+            {
+                float dist = Vector3.Distance(transform.position, currentwindow.text.transform.position);
+                Debug.Log(dist);
+                if (dist <= 0.7f)
+                {
+                    currentwindow.textrip();
+                    step = false;
+                    StartCoroutine(cd());
                 }
             }
             

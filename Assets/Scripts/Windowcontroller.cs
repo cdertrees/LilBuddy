@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Windowcontroller : MonoBehaviour
@@ -8,6 +9,8 @@ public class Windowcontroller : MonoBehaviour
     public Animator anim;
     public Buddycontroller buddy;
     public GameObject closebutton;
+    public GameObject text;
+    public TMP_Text pulltext;
 
     public void Awake()
     {
@@ -46,6 +49,13 @@ public class Windowcontroller : MonoBehaviour
         }
     }
 
+    public void textrip()
+    {
+        if (pulltext.text != "")
+        {
+            buddy.heldstring = pulltext.text;
+        }
+    }
     public void close()
     {
         anim.SetBool("close", true);
