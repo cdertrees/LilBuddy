@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class Buddycontroller : MonoBehaviour
 {
@@ -99,7 +96,16 @@ public class Buddycontroller : MonoBehaviour
                 bool isDoublePress = Time.time - timesincepress <= delay;
                 if (isDoublePress)
                 {
+                    #region folder navigation
 
+                    if (inside && step && insideobject)
+                    {
+                        step = false;
+                        StartCoroutine(cd());
+                        filesystem.navigate(folder);
+                    }
+
+                    #endregion
                     #region servecontent
                     if (step)
                     {
@@ -114,16 +120,6 @@ public class Buddycontroller : MonoBehaviour
                         }
                         closest.openWindow();
                     }
-                    #endregion
-                    #region folder navigation
-
-                    if (inside && step && insideobject)
-                    {
-                        step = false;
-                        StartCoroutine(cd());
-                        filesystem.navigate(folder);
-                    }
-
                     #endregion
                     firstpress = false;
                 }
@@ -190,7 +186,7 @@ public class Buddycontroller : MonoBehaviour
             if (step)
             {
                 step = false;
-                transform.Translate(Vector3.up * 0.3f);
+                transform.Translate(Vector3.up * 0.4f);
                 StartCoroutine(cd());
             }
         }
@@ -199,7 +195,7 @@ public class Buddycontroller : MonoBehaviour
             if (step)
             {
                 step = false;
-                transform.Translate(Vector3.up * -0.3f);
+                transform.Translate(Vector3.up * -0.4f);
                 StartCoroutine(cd());
             }
         }
@@ -208,7 +204,7 @@ public class Buddycontroller : MonoBehaviour
             if (step)
             {
                 step = false;
-                transform.Translate(Vector3.left * 0.3f);
+                transform.Translate(Vector3.left * 0.4f);
                 StartCoroutine(cd());
             }
         }
@@ -217,7 +213,7 @@ public class Buddycontroller : MonoBehaviour
             if (step)
             {
                 step = false;
-                transform.Translate(Vector3.left * -0.3f);
+                transform.Translate(Vector3.left * -0.4f);
                 StartCoroutine(cd());
             }
         }
@@ -300,7 +296,7 @@ public class Buddycontroller : MonoBehaviour
     }
     public IEnumerator cd()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         step = true;
     }
 

@@ -39,7 +39,7 @@ public class Windowcontroller : MonoBehaviour
     {
         if (this.gameObject.layer == 6)
         {
-            if (collision.gameObject.layer == 3 && buddy.insideobject == false)
+            if (collision.gameObject.layer == 3)
             {
                 anim.SetBool("bigger", false);
             }
