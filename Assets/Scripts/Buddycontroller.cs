@@ -93,7 +93,7 @@ public class Buddycontroller : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-
+            #region Doubletap
             if (firstpress)
             {
                 bool isDoublePress = Time.time - timesincepress <= delay;
@@ -134,6 +134,7 @@ public class Buddycontroller : MonoBehaviour
             }
 
             timesincepress = Time.time;
+            #endregion
         }
 
         if (firstpress && Time.time - timesincepress > delay)
@@ -158,6 +159,7 @@ public class Buddycontroller : MonoBehaviour
 
             #endregion
             
+            #region close window
             if (inside && step && insideobject)
             {
                 step = false;
@@ -171,6 +173,7 @@ public class Buddycontroller : MonoBehaviour
             }
             
             firstpress = false;
+            #endregion
         }
     }
 
