@@ -10,6 +10,6 @@ public class contentserver : MonoBehaviour
     public void openWindow()
     {
         window.SetActive(true);
-        window.transform.position = new Vector3(0, 0, 0);
+        window.transform.position = new Vector3(Random.Range(5,-5), Random.Range(5,-5), 0);
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Buddycontroller : MonoBehaviour
@@ -36,6 +37,7 @@ public class Buddycontroller : MonoBehaviour
     public int folder;
     [Header("Lists")]
     public List<contentserver> icons;
+    public List<Windowcontroller> windows;
     [Header("Strings")]
     public string heldstring;
     #endregion
@@ -322,6 +324,7 @@ public class Buddycontroller : MonoBehaviour
         if (other.gameObject.GetComponentInParent<Windowcontroller>() != null)
         {
             currentwindow = other.gameObject.GetComponentInParent<Windowcontroller>();
+            currentwindow.pushtofront();
         }
     }
 }
