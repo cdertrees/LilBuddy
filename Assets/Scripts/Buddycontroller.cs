@@ -173,7 +173,7 @@ public class Buddycontroller : MonoBehaviour
             }
             #endregion
             #region riptext
-            if (inside && step && insideobject)
+            if (inside && step && insideobject && heldstring=="")
             {
                 float dist = Vector3.Distance(transform.position, currentwindow.text.transform.position);
                 Debug.Log(dist);
@@ -185,6 +185,15 @@ public class Buddycontroller : MonoBehaviour
                 }
             }
             
+            #endregion
+            #region filltext
+            if (inside && step && insideobject && heldstring!="")
+            {
+                currentwindow.filltext();
+                step = false;
+                StartCoroutine(cd());
+                heldstring = "";
+            }
             firstpress = false;
             #endregion
         }

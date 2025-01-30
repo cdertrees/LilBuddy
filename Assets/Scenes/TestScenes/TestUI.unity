@@ -414,6 +414,7 @@ MonoBehaviour:
   currentposition: 0
   can: {fileID: 94664631}
   centcol: {fileID: 204539480}
+  setstring: 
 --- !u!50 &15409437
 Rigidbody2D:
   serializedVersion: 4
@@ -5176,6 +5177,7 @@ MonoBehaviour:
   currentposition: 0
   can: {fileID: 2032262204}
   centcol: {fileID: 1254991127}
+  setstring: 
 --- !u!1 &915742786 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6415770726841551531, guid: 221e3a6d50c222e489846aacda757510, type: 3}
@@ -6128,6 +6130,7 @@ MonoBehaviour:
   currentposition: 0
   can: {fileID: 1596964934}
   centcol: {fileID: 1993657709}
+  setstring: 
 --- !u!50 &1100188962
 Rigidbody2D:
   serializedVersion: 4
@@ -6298,7 +6301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1130451215
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6431,11 +6434,12 @@ MonoBehaviour:
   anim: {fileID: 1130451216}
   buddy: {fileID: 1839542477}
   closebutton: {fileID: 1049978599}
-  text: {fileID: 0}
+  text: {fileID: 126363551}
   pulltext: {fileID: 0}
   currentposition: 0
   can: {fileID: 1768149380}
   centcol: {fileID: 975003183}
+  setstring: GTX07
 --- !u!50 &1130451218
 Rigidbody2D:
   serializedVersion: 4
@@ -7056,11 +7060,12 @@ MonoBehaviour:
   anim: {fileID: 1200252703}
   buddy: {fileID: 1839542477}
   closebutton: {fileID: 468761315}
-  text: {fileID: 0}
-  pulltext: {fileID: 0}
+  text: {fileID: 1716767001}
+  pulltext: {fileID: 1716767003}
   currentposition: 0
   can: {fileID: 884058838}
   centcol: {fileID: 57272805}
+  setstring: 
 --- !u!50 &1200252705
 Rigidbody2D:
   serializedVersion: 4
@@ -10397,6 +10402,7 @@ MonoBehaviour:
   currentposition: 0
   can: {fileID: 1408858402}
   centcol: {fileID: 1016835348}
+  setstring: 
 --- !u!50 &1865454155
 Rigidbody2D:
   serializedVersion: 4

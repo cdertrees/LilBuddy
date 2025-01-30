@@ -14,6 +14,7 @@ public class Windowcontroller : MonoBehaviour
     public int currentposition;
     public Canvas can;
     public BoxCollider2D centcol;
+    public string setstring;
 
     public void Awake()
     {
@@ -64,6 +65,15 @@ public class Windowcontroller : MonoBehaviour
         if (pulltext.text != "")
         {
             buddy.heldstring = pulltext.text;
+        }
+    }
+
+    public void filltext()
+    {
+        Debug.Log("stringcompare");
+        if (buddy.heldstring == setstring)
+        {
+            Debug.Log("rightstring");
         }
     }
     public void close()
