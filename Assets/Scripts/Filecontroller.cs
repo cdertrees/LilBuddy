@@ -28,6 +28,7 @@ public class Filecontroller : MonoBehaviour
     [Header("Content Files")]
     public List<GameObject> contentFiles;
     #endregion
+    public Buddycontroller buddy;
 
     public void Start()
     {
@@ -212,9 +213,9 @@ public class Filecontroller : MonoBehaviour
         }
     }
 
-    public void navigate(int f)
+    public void navigate()
     {
-        switch (f)
+        switch (buddy.folder)
         {
             case 1:
                 Depth = 2;

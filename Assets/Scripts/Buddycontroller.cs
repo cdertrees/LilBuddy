@@ -132,7 +132,7 @@ public class Buddycontroller : MonoBehaviour
                             step = false;
                             StartCoroutine(cd());
                             Debug.Log("navtest");
-                            filesystem.navigate(folder);
+                            filesystem.navigate();
                         }
                     }
                     #endregion
