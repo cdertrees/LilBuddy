@@ -101,30 +101,38 @@ public class Buddycontroller : MonoBehaviour
                 bool isDoublePress = Time.time - timesincepress <= delay;
                 if (isDoublePress)
                 {
-                    #region folder navigation
-
-                    if (inside && step && insideobject)
-                    {
-                        step = false;
-                        StartCoroutine(cd());
-                        filesystem.navigate(folder);
-                    }
-
-                    #endregion
                     #region servecontent
-                    if (step)
+                    if (!inside && step)
                     {
-                        step = false;
-                        StartCoroutine(cd());
                         foreach (contentserver t in icons)
                         {
                             float dist = Vector3.Distance(transform.position, t.transform.position);
                             Debug.Log(dist);
-                            if (dist >= 0.7f) continue;
-                            closest = t;
+                            if (dist <= 0.7f)
+                            {
+                                step = false;
+                                StartCoroutine(cd());
+                                closest = t;
+                            }
                         }
                         closest.openWindow();
                     }
+                    #endregion
+                    #region folder navigation
+
+                    if (inside && step && insideobject)
+                    {
+                        
+                        foreach (GameObject t in filesystem.folders)
+                        {
+                            float dist = Vector3.Distance(transform.position, t.transform.position);
+                            if (dist >= 0.7f) continue;
+                            step = false;
+                            StartCoroutine(cd());
+                            filesystem.navigate(folder);
+                        }
+                    }
+
                     #endregion
                     firstpress = false;
                 }
@@ -187,7 +195,6 @@ public class Buddycontroller : MonoBehaviour
                 currentwindow.filltext();
                 step = false;
                 StartCoroutine(cd());
-                heldstring = "";
             }
             firstpress = false;
             #endregion

@@ -51,6 +51,10 @@ public class Filecontroller : MonoBehaviour
                         go.SetActive(false);
                     }
                 }
+                foreach (GameObject cf in contentFiles)
+                {
+                    cf.SetActive(false);
+                }
                 break;
             #endregion
             #region depth2
@@ -67,6 +71,17 @@ public class Filecontroller : MonoBehaviour
                             else
                             {
                                 go.SetActive(false);
+                            }
+                        }
+                        foreach (GameObject cf in contentFiles)
+                        {
+                            if (contentFiles.IndexOf(cf) < 2)
+                            {
+                                cf.SetActive(true);
+                            }
+                            else
+                            {
+                                cf.SetActive(false);
                             }
                         }
                         break;
@@ -93,6 +108,17 @@ public class Filecontroller : MonoBehaviour
                             else
                             {
                                 go.SetActive(false);
+                            }
+                        }
+                        foreach (GameObject cf in contentFiles)
+                        {
+                            if (contentFiles.IndexOf(cf) < 3)
+                            {
+                                cf.SetActive(true);
+                            }
+                            else
+                            {
+                                cf.SetActive(false);
                             }
                         }
                         break;
@@ -222,7 +248,16 @@ public class Filecontroller : MonoBehaviour
                 localroot = 8;
                 break;
             case 9:
-                Debug.Log("9");
+                contentserver temp = (contentserver)contentFiles[0].GetComponent(typeof(contentserver));
+                temp.openWindow();
+                break;
+            case 10:
+                contentserver temp2 = (contentserver)contentFiles[1].GetComponent(typeof(contentserver));
+                temp2.openWindow();
+                break;
+            case 11:
+                contentserver temp3 = (contentserver)contentFiles[2].GetComponent(typeof(contentserver));
+                temp3.openWindow();
                 break;
         }
         change();

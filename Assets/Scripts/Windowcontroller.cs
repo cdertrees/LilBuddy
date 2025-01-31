@@ -73,10 +73,18 @@ public class Windowcontroller : MonoBehaviour
     public void filltext()
     {
         Debug.Log("stringcompare");
-        if (buddy.heldstring == setstring)
+        Debug.Log(buddy.heldstring);
+        Debug.Log(setstring);
+        if (buddy.heldstring.Equals(setstring))
         {
-            group1.alpha = 1;
-            group2.alpha = 0;
+            Debug.Log("rightstring");
+            buddy.heldstring = "";
+            set1 = false;
+            set2 = true;
+        }
+        else
+        {
+            Debug.Log("failedcompare");
         }
     }
     public void close()
