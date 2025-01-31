@@ -175,14 +175,9 @@ public class Buddycontroller : MonoBehaviour
             #region riptext
             if (inside && step && insideobject && heldstring=="")
             {
-                float dist = Vector3.Distance(transform.position, currentwindow.text.transform.position);
-                Debug.Log(dist);
-                if (dist <= 0.7f)
-                {
-                    currentwindow.textrip();
-                    step = false;
-                    StartCoroutine(cd());
-                }
+                currentwindow.textrip();
+                step = false;
+                StartCoroutine(cd());
             }
             
             #endregion

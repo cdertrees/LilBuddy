@@ -15,6 +15,8 @@ public class Windowcontroller : MonoBehaviour
     public Canvas can;
     public BoxCollider2D centcol;
     public string setstring;
+    public bool set1, set2;
+    public CanvasGroup group1, group2;
 
     public void Awake()
     {
@@ -73,7 +75,8 @@ public class Windowcontroller : MonoBehaviour
         Debug.Log("stringcompare");
         if (buddy.heldstring == setstring)
         {
-            Debug.Log("rightstring");
+            group1.alpha = 1;
+            group2.alpha = 0;
         }
     }
     public void close()
@@ -87,6 +90,19 @@ public class Windowcontroller : MonoBehaviour
         anim.SetBool("close", false);
     }
 
+    public void Update()
+    {
+        if (set1)
+        {
+            group1.alpha = 1;
+            group2.alpha = 0;
+        }
+        if (set2)
+        {
+            group1.alpha = 0;
+            group2.alpha = 1;
+        }
+    }
 
     public void pushtofront()
     {
