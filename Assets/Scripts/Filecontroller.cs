@@ -112,7 +112,7 @@ public class Filecontroller : MonoBehaviour
                         }
                         foreach (GameObject cf in contentFiles)
                         {
-                            if (contentFiles.IndexOf(cf) < 3)
+                            if (contentFiles.IndexOf(cf) < 3 && contentFiles.IndexOf(cf) > 1)
                             {
                                 cf.SetActive(true);
                             }
@@ -132,11 +132,12 @@ public class Filecontroller : MonoBehaviour
                             else
                             {
                                 cf.SetActive(false);
-                                foreach (GameObject go in folders)
-                                {
-                                    go.SetActive(false);
-                                }
+                                
                             }
+                        }   
+                        foreach (GameObject go in folders)
+                        {
+                            go.SetActive(false);
                         }
                         break;
                 }
@@ -258,6 +259,43 @@ public class Filecontroller : MonoBehaviour
             case 11:
                 contentserver temp3 = (contentserver)contentFiles[2].GetComponent(typeof(contentserver));
                 temp3.openWindow();
+                break;
+            case 12:
+                switch (localroot)
+                {
+                    case 1:
+                        Depth = 1;
+                        localroot = 0;
+                        break;
+                    case 2:
+                        Depth = 1;
+                        localroot = 0;
+                        break;
+                    case 3:
+                        Depth = 1;
+                        localroot = 0;
+                        break;
+                    case 4:
+                        Depth = 1;
+                        localroot = 0;
+                        break;
+                    case 5:
+                        Depth = 2;
+                        localroot = 1;
+                        break;
+                    case 6:
+                        Depth = 2;
+                        localroot = 1;
+                        break;
+                    case 7:
+                        Depth = 2;
+                        localroot = 2;
+                        break;
+                    case 8:
+                        Depth = 2;
+                        localroot = 4;
+                        break;
+                }
                 break;
         }
         change();

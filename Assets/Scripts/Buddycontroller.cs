@@ -107,7 +107,6 @@ public class Buddycontroller : MonoBehaviour
                         foreach (contentserver t in icons)
                         {
                             float dist = Vector3.Distance(transform.position, t.transform.position);
-                            Debug.Log(dist);
                             if (dist <= 0.7f)
                             {
                                 step = false;
@@ -126,13 +125,21 @@ public class Buddycontroller : MonoBehaviour
                         foreach (GameObject t in filesystem.folders)
                         {
                             float dist = Vector3.Distance(transform.position, t.transform.position);
-                            if (dist >= 0.7f) continue;
+                            if (dist <= 1f) continue;
                             step = false;
                             StartCoroutine(cd());
+                            Debug.Log("navtest");
                             filesystem.navigate(folder);
                         }
                     }
-
+                    #endregion
+                    #region droptext
+                    if (step && heldstring!="")
+                    {
+                        heldstring = "";
+                        step = false;
+                        StartCoroutine(cd());
+                    }
                     #endregion
                     firstpress = false;
                 }
@@ -180,15 +187,7 @@ public class Buddycontroller : MonoBehaviour
                 }
             }
             #endregion
-            #region riptext
-            if (inside && step && insideobject && heldstring=="")
-            {
-                currentwindow.textrip();
-                step = false;
-                StartCoroutine(cd());
-            }
             
-            #endregion
             #region filltext
             if (inside && step && insideobject && heldstring!="")
             {
@@ -196,8 +195,17 @@ public class Buddycontroller : MonoBehaviour
                 step = false;
                 StartCoroutine(cd());
             }
-            firstpress = false;
+            
             #endregion
+            #region riptext
+            if (inside && step && insideobject && heldstring=="")
+            {
+                currentwindow.textrip();
+                step = false;
+                StartCoroutine(cd());
+            }
+            #endregion
+            firstpress = false;
         }
     }
 

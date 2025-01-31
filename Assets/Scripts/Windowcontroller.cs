@@ -14,9 +14,9 @@ public class Windowcontroller : MonoBehaviour
     public int currentposition;
     public Canvas can;
     public BoxCollider2D centcol;
-    public string setstring;
-    public bool set1, set2;
-    public CanvasGroup group1, group2;
+    public string setstring, setstring2, setstring3;
+    public bool set1, set2, set3;
+    public CanvasGroup group1, group2, group3;
 
     public void Awake()
     {
@@ -72,19 +72,32 @@ public class Windowcontroller : MonoBehaviour
 
     public void filltext()
     {
-        Debug.Log("stringcompare");
-        Debug.Log(buddy.heldstring);
-        Debug.Log(setstring);
-        if (buddy.heldstring.Equals(setstring))
+        if (set1)
         {
-            Debug.Log("rightstring");
-            buddy.heldstring = "";
-            set1 = false;
-            set2 = true;
+            if (buddy.heldstring.Equals(setstring))
+            {
+                set1 = false;
+                set2 = true;
+                set3 = false;
+                buddy.heldstring = "";
+            }
         }
-        else
+        if (set2)
         {
-            Debug.Log("failedcompare");
+            if (buddy.heldstring.Equals(setstring2))
+            {
+                set1 = false;
+                set2 = false;
+                set3 = true;
+                buddy.heldstring = "";
+            }
+        }
+        if (set3)
+        {
+            if (buddy.heldstring.Equals(setstring3))
+            {
+                Debug.Log("cutscene start");
+            }
         }
     }
     public void close()
@@ -104,17 +117,24 @@ public class Windowcontroller : MonoBehaviour
         {
             group1.alpha = 1;
             group2.alpha = 0;
+            group3.alpha = 0;
         }
         if (set2)
         {
             group1.alpha = 0;
             group2.alpha = 1;
+            group3.alpha = 0;
+        }
+        if (set3)
+        {
+            group1.alpha = 0;
+            group2.alpha = 0;
+            group3.alpha = 1;
         }
     }
 
     public void pushtofront()
     {
-        Debug.Log("push");
         buddy.windows.RemoveAt(buddy.windows.IndexOf(this));
         foreach (Windowcontroller d in buddy.windows)
         {
@@ -124,7 +144,6 @@ public class Windowcontroller : MonoBehaviour
             d.can.sortingOrder--;
         }
         buddy.windows.Insert(0, this);
-        Debug.Log("set");
         centcol.enabled = true;
     }
 }
