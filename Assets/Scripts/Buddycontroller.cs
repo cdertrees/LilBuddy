@@ -102,13 +102,16 @@ public class Buddycontroller : MonoBehaviour
                 if (isDoublePress)
                 {
                     #region servecontent
-                    if (!inside && step)
+                    if (!insideobject && step)
                     {
+                        Debug.Log("try for contentserve");
                         foreach (contentserver t in icons)
                         {
                             float dist = Vector3.Distance(transform.position, t.transform.position);
-                            if (dist <= 0.7f)
+                            Debug.Log(dist);
+                            if (dist <= 10.08f)
                             {
+                                Debug.Log("try for pass1");
                                 step = false;
                                 StartCoroutine(cd());
                                 closest = t;
@@ -179,7 +182,7 @@ public class Buddycontroller : MonoBehaviour
             if (inside && step && insideobject)
             {
                 float dist = Vector3.Distance(transform.position, currentwindow.closebutton.transform.position);
-                if (dist <= 0.7f)
+                if (dist <= 10.08f)
                 {
                     currentwindow.close();
                     step = false;

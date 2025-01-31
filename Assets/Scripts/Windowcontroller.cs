@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Windowcontroller : MonoBehaviour
 {
@@ -96,7 +97,7 @@ public class Windowcontroller : MonoBehaviour
         {
             if (buddy.heldstring.Equals(setstring3))
             {
-                Debug.Log("cutscene start");
+                SceneManager.LoadScene("Scenes/TestScenes/CUTSCENE2");
             }
         }
     }
